@@ -8,8 +8,7 @@ import {
   MessageCircle, 
   ArrowRight, 
   TrendingUp,
-  Clock,
-  Star
+  Clock
 } from 'lucide-react';
 
 // --- Shared Components ---
@@ -31,26 +30,48 @@ const GlassCard: React.FC<{ children?: React.ReactNode; className?: string }> = 
   </div>
 );
 
+// --- Utils ---
+
+const WHATSAPP_NUMBER = "51929932210";
+
+const handleWhatsAppRedirect = (message: string) => {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+};
+
+const handlePlanSelection = (planName: string, price: string) => {
+  let message = "";
+  if (planName === "Mensual") {
+    message = `¡Hola VendeMass! ⚡ Estoy interesado en el Plan Mensual (S/ ${price}). Quiero automatizar mi catálogo hoy mismo.`;
+  } else if (planName === "Trimestral") {
+    message = `¡Hola VendeMass! ⚡ Vengo por la oferta del Plan Trimestral (S/ ${price}). Es la que mejor me conviene, ¿cómo empezamos?`;
+  } else if (planName === "Anual") {
+    message = `¡Hola VendeMass! ⚡ Quiero el Plan Anual (S/ ${price}) para mi negocio. Deseo configurar mi catálogo por todo un año.`;
+  } else {
+    message = "Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.";
+  }
+  handleWhatsAppRedirect(message);
+};
+
 // --- Sections ---
 
 const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6">
     <div className="max-w-7xl mx-auto flex items-center justify-between">
-      <div className="flex items-center gap-2 group cursor-pointer">
+      <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <div className="p-2 bg-blue-600 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.5)] group-hover:scale-110 transition-transform">
           <Zap className="w-5 h-5 text-white fill-current" />
         </div>
         <span className="text-xl font-black tracking-tighter text-white uppercase">VendeMass</span>
       </div>
-      <motion.a 
-        href="https://wa.me/51929932210"
-        target="_blank"
+      <motion.button 
+        onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all backdrop-blur-md"
       >
         Contactar
-      </motion.a>
+      </motion.button>
     </div>
   </nav>
 );
@@ -73,9 +94,8 @@ const Hero = () => (
           <span className="text-white"> Sin comisiones, sin enredos, solo resultados.</span>
         </p>
         
-        <motion.a 
-          href="https://wa.me/51929932210"
-          target="_blank"
+        <motion.button 
+          onClick={() => document.getElementById('pricing')?.scrollIntoView({behavior: 'smooth'})}
           whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(37,99,235,0.5)" }}
           whileTap={{ scale: 0.98 }}
           className="inline-flex relative group bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-10 py-5 rounded-2xl font-black text-xl items-center gap-3 overflow-hidden shadow-2xl transition-all"
@@ -83,7 +103,7 @@ const Hero = () => (
           <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
           Quiero mi catálogo ahora
           <ArrowRight className="w-6 h-6" />
-        </motion.a>
+        </motion.button>
       </FadeInUp>
 
       <FadeInUp delay={0.2}>
@@ -93,7 +113,6 @@ const Hero = () => (
           className="relative"
         >
           <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-[0_0_100px_-20px_rgba(37,99,235,0.7)] border border-white/20 bg-slate-900/40">
-            {/* Updated Hero Image with the new persuasive link provided */}
             <img 
               src="https://i.ibb.co/C5RPFrNK/persusivo-enlace.png" 
               onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2000&auto=format&fit=crop" }}
@@ -137,9 +156,12 @@ const Pricing = () => {
                   </div>
                 )}
                 <h3 className="text-xl font-bold text-slate-300 mb-6 tracking-tight uppercase">{plan.name}</h3>
-                <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-6xl font-black text-white">S/ {plan.price}</span>
-                  <span className="text-slate-500 font-bold">/ {plan.period}</span>
+                <div className="flex flex-col gap-1 mb-8">
+                    <div className="flex items-baseline gap-2">
+                        <span className="text-6xl font-black text-white">S/ {plan.price}</span>
+                        <span className="text-slate-500 font-bold">/ {plan.period}</span>
+                    </div>
+                    <span className="text-[10px] text-cyan-400/80 font-bold uppercase tracking-wider mt-2">Redirección inmediata a WhatsApp</span>
                 </div>
                 
                 <ul className="space-y-4 mb-10 flex-grow">
@@ -157,13 +179,14 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <motion.a 
-                  href="https://wa.me/51929932210"
-                  target="_blank"
+                <motion.button 
+                  onClick={() => handlePlanSelection(plan.name, plan.price)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`w-full py-4 rounded-xl font-black text-center transition-all ${plan.featured ? 'bg-cyan-400 text-black hover:bg-cyan-300' : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'}`}
                 >
                   Seleccionar
-                </motion.a>
+                </motion.button>
               </GlassCard>
             </FadeInUp>
           ))}
@@ -179,9 +202,8 @@ const CTAFinal = () => (
     <FadeInUp>
       <h2 className="text-5xl md:text-7xl font-black text-white mb-12 tracking-tighter">¿Listo para vender más?</h2>
       
-      <motion.a 
-        href="https://wa.me/51929932210"
-        target="_blank"
+      <motion.button 
+        onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
         animate={{ 
           boxShadow: [
             "0 0 0 0px rgba(37, 211, 102, 0.4)", 
@@ -196,7 +218,7 @@ const CTAFinal = () => (
       >
         <MessageCircle className="w-10 h-10 md:w-14 md:h-14 group-hover:rotate-12 transition-transform" />
         EMPEZAR AHORA
-      </motion.a>
+      </motion.button>
       
       <p className="mt-10 text-slate-500 font-bold uppercase tracking-[0.3em] text-sm">Respuesta inmediata por WhatsApp</p>
     </FadeInUp>
@@ -204,10 +226,8 @@ const CTAFinal = () => (
 );
 
 const FloatingWhatsApp = () => (
-  <motion.a
-    href="https://wa.me/51929932210"
-    target="_blank"
-    rel="noopener noreferrer"
+  <motion.button
+    onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
     initial={{ scale: 0, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     whileHover={{ scale: 1.15 }}
@@ -220,10 +240,10 @@ const FloatingWhatsApp = () => (
       transition={{ duration: 2, repeat: Infinity }}
       className="absolute inset-0 rounded-full bg-[#25D366]"
     />
-    <div className="absolute right-full mr-4 bg-slate-900 border border-white/10 px-4 py-2 rounded-xl text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+    <div className="absolute right-full mr-4 bg-slate-900 border border-white/10 px-4 py-2 rounded-xl text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
       ¡Hablemos por WhatsApp!
     </div>
-  </motion.a>
+  </motion.button>
 );
 
 const Footer = () => (
