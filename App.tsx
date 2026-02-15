@@ -8,7 +8,9 @@ import {
   MessageCircle, 
   ArrowRight, 
   TrendingUp,
-  Clock
+  Clock,
+  Layout,
+  Rocket
 } from 'lucide-react';
 
 // --- Shared Components ---
@@ -42,11 +44,11 @@ const handleWhatsAppRedirect = (message: string) => {
 const handlePlanSelection = (planName: string, price: string) => {
   let message = "";
   if (planName === "Mensual") {
-    message = `¡Hola VendeMass! ⚡ Estoy interesado en el Plan Mensual (S/ ${price}). Quiero automatizar mi catálogo hoy mismo.`;
+    message = `¡Hola VendeMass! Quiero que armen mi catálogo gratis. Si me gusta, activaré el Plan Mensual (S/ ${price}).`;
   } else if (planName === "Trimestral") {
-    message = `¡Hola VendeMass! ⚡ Vengo por la oferta del Plan Trimestral (S/ ${price}). Es la que mejor me conviene, ¿cómo empezamos?`;
+    message = `¡Hola VendeMass! Deseo mi catálogo de cortesía. Mi meta es activar el Plan Trimestral (S/ ${price}) apenas esté listo.`;
   } else if (planName === "Anual") {
-    message = `¡Hola VendeMass! ⚡ Quiero el Plan Anual (S/ ${price}) para mi negocio. Deseo configurar mi catálogo por todo un año.`;
+    message = `¡Hola! Quiero que preparen mi catálogo profesional ahora mismo. Mi intención es el Plan Anual (S/ ${price}).`;
   } else {
     message = "Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.";
   }
@@ -65,12 +67,12 @@ const Navbar = () => (
         <span className="text-xl font-black tracking-tighter text-white uppercase">VendeMass</span>
       </div>
       <motion.button 
-        onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
+        onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría que armen mi catálogo gratis para probar el sistema.")}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all backdrop-blur-md"
       >
-        Contactar
+        Probar Gratis
       </motion.button>
     </div>
   </nav>
@@ -84,24 +86,23 @@ const Hero = () => (
       <FadeInUp>
         <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full mb-8">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-          <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em]">Automatización Premium</span>
+          <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em]">Crea primero, paga después</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8">
-          Deja de recibir mensajes <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">desordenados.</span> Empieza a recibir pedidos.
+          Diseñamos tu catálogo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">totalmente gratis.</span>
         </h1>
         <p className="text-xl text-slate-400 mb-10 max-w-lg leading-relaxed font-medium">
-          VendeMass convierte tu catálogo de WhatsApp en una máquina de ventas automática. 
-          <span className="text-white"> Sin comisiones, sin enredos, solo resultados.</span>
+          Solo pagas para activarlo y lanzarlo a tu dominio. <span className="text-white">Sin riesgos, sin compromisos iniciales.</span> Prueba el poder de VendeMass hoy.
         </p>
         
         <motion.button 
-          onClick={() => document.getElementById('pricing')?.scrollIntoView({behavior: 'smooth'})}
+          onClick={() => handleWhatsAppRedirect("¡Hola VendeMass! Quiero que armen mi catálogo gratis para empezar.")}
           whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(37,99,235,0.5)" }}
           whileTap={{ scale: 0.98 }}
           className="inline-flex relative group bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-10 py-5 rounded-2xl font-black text-xl items-center gap-3 overflow-hidden shadow-2xl transition-all"
         >
           <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
-          Quiero mi catálogo ahora
+          Solicitar mi Catálogo Gratis
           <ArrowRight className="w-6 h-6" />
         </motion.button>
       </FadeInUp>
@@ -129,6 +130,34 @@ const Hero = () => (
   </section>
 );
 
+const HowItWorks = () => (
+  <section className="py-24 px-6 bg-slate-900/20">
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center mb-16">
+        <FadeInUp>
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">Cómo funciona</h2>
+          <p className="text-slate-400">Sin complicaciones, resultados en menos de 24 horas.</p>
+        </FadeInUp>
+      </div>
+      <div className="grid md:grid-cols-3 gap-8">
+        {[
+          { icon: <MessageCircle className="w-8 h-8"/>, title: "1. Cuéntanos", desc: "Envíanos tu carta o menú por WhatsApp y nosotros armamos tu catálogo sin compromiso." },
+          { icon: <Layout className="w-8 h-8"/>, title: "2. Revisión", desc: "Te enviamos un enlace de prueba para que veas cómo luce y funciona tu nuevo catálogo." },
+          { icon: <Rocket className="w-8 h-8"/>, title: "3. Activación", desc: "Si te gusta, eliges un plan, lo activamos y empiezas a recibir pedidos automáticos." },
+        ].map((step, i) => (
+          <FadeInUp key={i} delay={i * 0.1}>
+            <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-blue-500/30 transition-colors">
+              <div className="text-blue-500 mb-6">{step.icon}</div>
+              <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
+              <p className="text-slate-400 text-sm">{step.desc}</p>
+            </div>
+          </FadeInUp>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const Pricing = () => {
   const plans = [
     { name: "Mensual", price: "19", period: "1 mes", featured: false },
@@ -142,7 +171,9 @@ const Pricing = () => {
         <div className="text-center mb-20">
           <FadeInUp>
             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter">Inversión Directa</h2>
-            <p className="text-slate-400 text-lg">Impulsa tu negocio con la tecnología más avanzada del mercado.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Diseñamos tu catálogo totalmente gratis. Solo pagas para activarlo y lanzarlo a tu dominio propio.
+            </p>
           </FadeInUp>
         </div>
 
@@ -166,6 +197,7 @@ const Pricing = () => {
                 
                 <ul className="space-y-4 mb-10 flex-grow">
                   {[
+                    "Diseño Personalizado Gratis",
                     "Catálogo Digital Ilimitado",
                     "Pedidos Estructurados",
                     "Soporte Vía WhatsApp",
@@ -185,7 +217,7 @@ const Pricing = () => {
                   whileTap={{ scale: 0.95 }}
                   className={`w-full py-4 rounded-xl font-black text-center transition-all ${plan.featured ? 'bg-cyan-400 text-black hover:bg-cyan-300' : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'}`}
                 >
-                  Seleccionar
+                  Solicitar mi Catálogo Gratis
                 </motion.button>
               </GlassCard>
             </FadeInUp>
@@ -203,7 +235,7 @@ const CTAFinal = () => (
       <h2 className="text-5xl md:text-7xl font-black text-white mb-12 tracking-tighter">¿Listo para vender más?</h2>
       
       <motion.button 
-        onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
+        onClick={() => handleWhatsAppRedirect("¡Hola VendeMass! Quiero empezar con mi catálogo gratis hoy mismo.")}
         animate={{ 
           boxShadow: [
             "0 0 0 0px rgba(37, 211, 102, 0.4)", 
@@ -217,33 +249,12 @@ const CTAFinal = () => (
         className="inline-flex items-center gap-4 bg-[#25D366] text-white px-12 py-8 rounded-[2.5rem] font-black text-3xl md:text-5xl shadow-2xl group transition-transform"
       >
         <MessageCircle className="w-10 h-10 md:w-14 md:h-14 group-hover:rotate-12 transition-transform" />
-        EMPEZAR AHORA
+        PROBAR GRATIS
       </motion.button>
       
       <p className="mt-10 text-slate-500 font-bold uppercase tracking-[0.3em] text-sm">Respuesta inmediata por WhatsApp</p>
     </FadeInUp>
   </section>
-);
-
-const FloatingWhatsApp = () => (
-  <motion.button
-    onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    whileHover={{ scale: 1.15 }}
-    whileTap={{ scale: 0.9 }}
-    className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-5 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center cursor-pointer group"
-  >
-    <MessageCircle className="w-8 h-8 fill-current" />
-    <motion.span 
-      animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
-      transition={{ duration: 2, repeat: Infinity }}
-      className="absolute inset-0 rounded-full bg-[#25D366]"
-    />
-    <div className="absolute right-full mr-4 bg-slate-900 border border-white/10 px-4 py-2 rounded-xl text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
-      ¡Hablemos por WhatsApp!
-    </div>
-  </motion.button>
 );
 
 const Footer = () => (
@@ -302,10 +313,10 @@ export default function App() {
         </div>
       </section>
 
+      <HowItWorks />
       <Pricing />
       <CTAFinal />
       <Footer />
-      <FloatingWhatsApp />
     </div>
   );
 }
