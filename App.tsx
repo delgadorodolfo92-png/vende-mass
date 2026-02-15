@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -85,7 +84,7 @@ const Hero = () => (
       <FadeInUp>
         <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full mb-8">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-          <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em]">Automatización Premium</span>
+          <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em]">Crea primero, paga después.</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8">
           Deja de recibir mensajes <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">desordenados.</span> Empieza a recibir pedidos.
