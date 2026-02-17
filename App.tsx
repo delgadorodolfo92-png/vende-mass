@@ -56,7 +56,7 @@ const handlePlanSelection = (planName: string, price: string) => {
 // --- Sections ---
 
 const Navbar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6">
+  <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#020617]/50 backdrop-blur-md border-b border-white/5">
     <div className="max-w-7xl mx-auto flex items-center justify-between">
       <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <div className="p-2 bg-blue-600 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.5)] group-hover:scale-110 transition-transform">
@@ -68,7 +68,7 @@ const Navbar = () => (
         onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all backdrop-blur-md"
+        className="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2 rounded-full text-sm font-bold transition-all backdrop-blur-md"
       >
         Contactar
       </motion.button>
@@ -77,19 +77,19 @@ const Navbar = () => (
 );
 
 const Hero = () => (
-  <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden px-6">
+  <section className="relative pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden px-6">
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-blue-600/10 blur-[120px] -z-10 rounded-full" />
     
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
       <FadeInUp>
-        <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full mb-8">
+        <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full mb-6">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
           <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em]">Crea primero, paga después.</span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8">
+        <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
           Deja de recibir mensajes <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">desordenados.</span> Empieza a recibir pedidos.
         </h1>
-        <p className="text-xl text-slate-400 mb-10 max-w-lg leading-relaxed font-medium">
+        <p className="text-xl text-slate-400 mb-8 max-w-lg leading-relaxed font-medium">
           VendeMass convierte tu catálogo de WhatsApp en una máquina de ventas automática. 
           <span className="text-white"> Sin comisiones, sin enredos, solo resultados.</span>
         </p>
@@ -108,59 +108,26 @@ const Hero = () => (
 
       <FadeInUp delay={0.2}>
         <motion.div 
-          animate={{ y: [0, -25, 0] }}
+          animate={{ y: [0, -15, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           className="relative"
         >
-          <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-[0_0_100px_-20px_rgba(37,99,235,0.7)] border border-white/20 bg-slate-900/40">
+          <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-[0_0_80px_-20px_rgba(37,99,235,0.6)] border border-white/20 bg-slate-900/40">
             <img 
-              src="https://i.ibb.co/C5RPFrNK/persusivo-enlace.png" 
-              onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2000&auto=format&fit=crop" }}
+              src="https://mr9rdrny6j5vh19e.public.blob.vercel-storage.com/9593593295.png" 
+              width="450"
+              height="600"
+              loading="eager"
+              // @ts-ignore
+              fetchpriority="high"
               alt="VendeMass Persuasive Product View" 
-              className="w-full h-auto object-contain min-h-[450px] scale-[1.01]"
+              className="w-full h-auto object-contain scale-[1.01]"
               style={{ imageRendering: 'auto' }}
             />
           </div>
-          <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-600/30 blur-[100px] rounded-full" />
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-400/30 blur-[100px] rounded-full" />
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/30 blur-[80px] rounded-full" />
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-cyan-400/30 blur-[80px] rounded-full" />
         </motion.div>
-      </FadeInUp>
-    </div>
-  </section>
-);
-
-const TrustSection = () => (
-  <section className="py-20 px-6">
-    <div className="max-w-5xl mx-auto">
-      <FadeInUp>
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-          <div className="relative bg-white/5 backdrop-blur-2xl border border-blue-500/50 rounded-[2.5rem] p-8 md:p-14 shadow-2xl overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
-              <Zap className="w-64 h-64 text-blue-500" />
-            </div>
-            <div className="relative z-10">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-                <div className="flex-shrink-0 p-4 bg-blue-500/20 rounded-2xl">
-                  <ShieldCheck className="w-10 h-10 text-cyan-400" />
-                </div>
-                <div className="text-center md:text-left">
-                  <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-4">
-                    ¡Tu catálogo listo hoy mismo, sin costo inicial! 🚀
-                  </h2>
-                  <p className="text-lg md:text-2xl text-slate-300 leading-relaxed font-medium">
-                    Creemos tanto en nuestro sistema que no te pedimos dinero por adelantado. Nosotros nos encargamos de diseñar y configurar tu catálogo con tus productos y fotos totalmente gratis.
-                  </p>
-                </div>
-              </div>
-              <div className="p-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-xl">
-                <p className="text-lg md:text-xl text-slate-200 leading-relaxed font-semibold">
-                  Úsalo, pruébalo y mira cómo llegan tus pedidos. Solo pagas para activarlo y lanzarlo a tu dominio propio cuando estés 100% satisfecho.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </FadeInUp>
     </div>
   </section>
@@ -174,11 +141,11 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-32 px-6">
+    <section id="pricing" className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <FadeInUp>
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter">Inversión Directa</h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">Inversión Directa</h2>
             <p className="text-slate-400 text-lg">Impulsa tu negocio con la tecnología más avanzada del mercado.</p>
           </FadeInUp>
         </div>
@@ -193,7 +160,7 @@ const Pricing = () => {
                   </div>
                 )}
                 <h3 className="text-xl font-bold text-slate-300 mb-6 tracking-tight uppercase">{plan.name}</h3>
-                <div className="flex flex-col gap-1 mb-8">
+                <div className="flex flex-col gap-1 mb-6">
                     <div className="flex items-baseline gap-2">
                         <span className="text-6xl font-black text-white">S/ {plan.price}</span>
                         <span className="text-slate-500 font-bold">/ {plan.period}</span>
@@ -201,7 +168,7 @@ const Pricing = () => {
                     <span className="text-[10px] text-cyan-400/80 font-bold uppercase tracking-wider mt-2">Redirección inmediata a WhatsApp</span>
                 </div>
                 
-                <ul className="space-y-4 mb-10 flex-grow">
+                <ul className="space-y-3 mb-10 flex-grow">
                   {[
                     "Catálogo Digital Ilimitado",
                     "Pedidos Estructurados",
@@ -234,10 +201,10 @@ const Pricing = () => {
 };
 
 const CTAFinal = () => (
-  <section className="py-32 px-6 relative overflow-hidden text-center">
+  <section className="py-16 px-6 relative overflow-hidden text-center">
     <div className="absolute inset-0 bg-blue-600/5 -z-10" />
     <FadeInUp>
-      <h2 className="text-5xl md:text-7xl font-black text-white mb-12 tracking-tighter">¿Listo para vender más?</h2>
+      <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter">¿Listo para vender más?</h2>
       
       <motion.button 
         onClick={() => handleWhatsAppRedirect("Hola VendeMass, me gustaría recibir más información sobre el sistema de pedidos por WhatsApp.")}
@@ -257,13 +224,13 @@ const CTAFinal = () => (
         EMPEZAR AHORA
       </motion.button>
       
-      <p className="mt-10 text-slate-500 font-bold uppercase tracking-[0.3em] text-sm">Respuesta inmediata por WhatsApp</p>
+      <p className="mt-8 text-slate-500 font-bold uppercase tracking-[0.3em] text-sm">Respuesta inmediata por WhatsApp</p>
     </FadeInUp>
   </section>
 );
 
 const Footer = () => (
-  <footer className="py-12 px-6 border-t border-white/5 bg-black/20 text-center">
+  <footer className="py-10 px-6 border-t border-white/5 bg-black/20 text-center">
     <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
       <div className="flex items-center gap-2">
         <Zap className="w-6 h-6 text-blue-600 fill-current" />
@@ -286,39 +253,38 @@ export default function App() {
       <Navbar />
       <Hero />
       
-      <section className="py-32 px-6 relative">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+      <section className="py-12 px-6 relative">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
           <FadeInUp delay={0.1}>
             <div className="flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-blue-600/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">
-                <Smartphone className="w-8 h-8" />
+              <div className="w-14 h-14 bg-blue-600/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform">
+                <Smartphone className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tighter">Catálogo Móvil</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Experiencia de compra fluida y rápida, optimizada para convertir cada visita en venta.</p>
+              <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">Catálogo Móvil</h4>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-[280px]">Experiencia de compra fluida y rápida, optimizada para convertir cada visita en venta.</p>
             </div>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <div className="flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-cyan-400/10 border border-cyan-400/20 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
-                <Clock className="w-8 h-8" />
+              <div className="w-14 h-14 bg-cyan-400/10 border border-cyan-400/20 rounded-2xl flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
+                <Clock className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tighter">Sin Mensajes Largos</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Recibe la orden estructurada: dirección, pago y detalles sin preguntas infinitas.</p>
+              <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">Sin Mensajes Largos</h4>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-[280px]">Recibe la orden estructurada: dirección, pago y detalles sin preguntas infinitas.</p>
             </div>
           </FadeInUp>
           <FadeInUp delay={0.3}>
             <div className="flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-center text-green-500 mb-6 group-hover:scale-110 transition-transform">
-                <TrendingUp className="w-8 h-8" />
+              <div className="w-14 h-14 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-center text-green-500 mb-4 group-hover:scale-110 transition-transform">
+                <TrendingUp className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tighter">Aumenta tu Ticket</h4>
-              <p className="text-slate-400 text-sm leading-relaxed">Vende más ofreciendo adicionales y complementos de forma visual y atractiva.</p>
+              <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">Aumenta tu Ticket</h4>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-[280px]">Vende más ofreciendo adicionales y complementos de forma visual y atractiva.</p>
             </div>
           </FadeInUp>
         </div>
       </section>
 
-      <TrustSection />
       <Pricing />
       <CTAFinal />
       <Footer />
